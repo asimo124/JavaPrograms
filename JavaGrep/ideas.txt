@@ -1,0 +1,5 @@
+
+
+1.- make default primary language already being selected when you get to search form
+
+2.- play around with hitting return to begin search again. repeat runSearch() code in both actions to see if that fixes previous issues.

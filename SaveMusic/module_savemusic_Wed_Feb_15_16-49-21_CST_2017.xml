@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_savemusic" default="compile.module.savemusic">
+  <dirname property="module.savemusic.basedir" file="${ant.file.module_savemusic}"/>
+  
+  <property name="module.jdk.home.savemusic" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.savemusic" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.savemusic" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.savemusic" value="-encoding UTF-8 -source 8 -target 8 ${compiler.args}"/>
+  
+  <property name="savemusic.output.dir" value="${module.savemusic.basedir}/out/production/SaveMusic"/>
+  <property name="savemusic.testoutput.dir" value="${module.savemusic.basedir}/out/test/SaveMusic"/>
+  
+  <path id="savemusic.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="savemusic.module.production.classpath">
+    <path refid="${module.jdk.classpath.savemusic}"/>
+    <path refid="library.httpclient-4.5.3.classpath"/>
+    <path refid="library.apache-httpcomponents-httpclient-cache.classpath"/>
+    <path refid="library.commons-codec-1.9.classpath"/>
+    <path refid="library.commons-codec-1.9_(2).classpath"/>
+  </path>
+  
+  <path id="savemusic.runtime.production.module.classpath">
+    <pathelement location="${savemusic.output.dir}"/>
+    <path refid="library.httpclient-4.5.3.classpath"/>
+    <path refid="library.apache-httpcomponents-httpclient-cache.classpath"/>
+    <path refid="library.commons-codec-1.9.classpath"/>
+    <path refid="library.commons-codec-1.9_(2).classpath"/>
+  </path>
+  
+  <path id="savemusic.module.classpath">
+    <path refid="${module.jdk.classpath.savemusic}"/>
+    <pathelement location="${savemusic.output.dir}"/>
+    <path refid="library.httpclient-4.5.3.classpath"/>
+    <path refid="library.apache-httpcomponents-httpclient-cache.classpath"/>
+    <path refid="library.commons-codec-1.9.classpath"/>
+    <path refid="library.commons-codec-1.9_(2).classpath"/>
+  </path>
+  
+  <path id="savemusic.runtime.module.classpath">
+    <pathelement location="${savemusic.testoutput.dir}"/>
+    <pathelement location="${savemusic.output.dir}"/>
+    <path refid="library.httpclient-4.5.3.classpath"/>
+    <path refid="library.apache-httpcomponents-httpclient-cache.classpath"/>
+    <path refid="library.commons-codec-1.9.classpath"/>
+    <path refid="library.commons-codec-1.9_(2).classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.savemusic">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.savemusic">
+    <patternset refid="excluded.from.module.savemusic"/>
+  </patternset>
+  
+  <path id="savemusic.module.sourcepath">
+    <dirset dir="${module.savemusic.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.savemusic" depends="compile.module.savemusic.production,compile.module.savemusic.tests" description="Compile module SaveMusic"/>
+  
+  <target name="compile.module.savemusic.production" depends="register.custom.compilers" description="Compile module SaveMusic; production classes">
+    <mkdir dir="${savemusic.output.dir}"/>
+    <javac2 destdir="${savemusic.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.savemusic}/javac">
+      <compilerarg line="${compiler.args.savemusic}"/>
+      <bootclasspath refid="savemusic.module.bootclasspath"/>
+      <classpath refid="savemusic.module.production.classpath"/>
+      <src refid="savemusic.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.savemusic"/>
+    </javac2>
+    
+    <copy todir="${savemusic.output.dir}">
+      <fileset dir="${module.savemusic.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.savemusic.tests" depends="register.custom.compilers,compile.module.savemusic.production" description="compile module SaveMusic; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.savemusic" description="cleanup module">
+    <delete dir="${savemusic.output.dir}"/>
+    <delete dir="${savemusic.testoutput.dir}"/>
+  </target>
+</project>

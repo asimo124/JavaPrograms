@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_javagrep" default="compile.module.javagrep">
+  <dirname property="module.javagrep.basedir" file="${ant.file.module_javagrep}"/>
+  
+  <property name="module.jdk.home.javagrep" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.javagrep" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.javagrep" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.javagrep" value="-encoding UTF-8 -source 8 -target 8 ${compiler.args}"/>
+  
+  <property name="javagrep.output.dir" value="${module.javagrep.basedir}/out/production/JavaGrep"/>
+  <property name="javagrep.testoutput.dir" value="${module.javagrep.basedir}/out/test/JavaGrep"/>
+  
+  <path id="javagrep.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="javagrep.module.production.classpath">
+    <path refid="${module.jdk.classpath.javagrep}"/>
+  </path>
+  
+  <path id="javagrep.runtime.production.module.classpath">
+    <pathelement location="${javagrep.output.dir}"/>
+  </path>
+  
+  <path id="javagrep.module.classpath">
+    <path refid="${module.jdk.classpath.javagrep}"/>
+    <pathelement location="${javagrep.output.dir}"/>
+  </path>
+  
+  <path id="javagrep.runtime.module.classpath">
+    <pathelement location="${javagrep.testoutput.dir}"/>
+    <pathelement location="${javagrep.output.dir}"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.javagrep">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.javagrep">
+    <patternset refid="excluded.from.module.javagrep"/>
+  </patternset>
+  
+  <path id="javagrep.module.sourcepath">
+    <dirset dir="${module.javagrep.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.javagrep" depends="compile.module.javagrep.production,compile.module.javagrep.tests" description="Compile module JavaGrep"/>
+  
+  <target name="compile.module.javagrep.production" depends="register.custom.compilers" description="Compile module JavaGrep; production classes">
+    <mkdir dir="${javagrep.output.dir}"/>
+    <javac2 destdir="${javagrep.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.javagrep}/javac">
+      <compilerarg line="${compiler.args.javagrep}"/>
+      <bootclasspath refid="javagrep.module.bootclasspath"/>
+      <classpath refid="javagrep.module.production.classpath"/>
+      <src refid="javagrep.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.javagrep"/>
+    </javac2>
+    
+    <copy todir="${javagrep.output.dir}">
+      <fileset dir="${module.javagrep.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.javagrep.tests" depends="register.custom.compilers,compile.module.javagrep.production" description="compile module JavaGrep; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.javagrep" description="cleanup module">
+    <delete dir="${javagrep.output.dir}"/>
+    <delete dir="${javagrep.testoutput.dir}"/>
+  </target>
+</project>

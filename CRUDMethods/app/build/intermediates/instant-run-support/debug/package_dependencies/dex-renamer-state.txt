@@ -1,0 +1,13 @@
+#Thu May 04 15:55:42 CDT 2017
+renamed.3=classes2.dex
+renamed.2=classes4.dex
+renamed.1=classes3.dex
+renamed.0=classes.dex
+base.3=C\:\\Users\\AHawley\\AndroidStudioProjects\\CRUDMethods\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\classes_e087d049289e0ad41bcffd741c1b4d7d1f519b6a
+base.2=C\:\\Users\\AHawley\\AndroidStudioProjects\\CRUDMethods\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\support-annotations-22.0.0_4d9dd7ac852f81371f6c65a3568be6a164782b4d
+base.1=C\:\\Users\\AHawley\\AndroidStudioProjects\\CRUDMethods\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\internal_impl-22.0.0_747b0697618b9417350a93f143766a6d3117b15c
+base.0=C\:\\Users\\AHawley\\AndroidStudioProjects\\CRUDMethods\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\classes_27694ea794577f3d91250fb631933b77cfc2c021
+file.3=C\:\\Users\\AHawley\\AndroidStudioProjects\\CRUDMethods\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\classes_e087d049289e0ad41bcffd741c1b4d7d1f519b6a\\classes.dex
+file.2=C\:\\Users\\AHawley\\AndroidStudioProjects\\CRUDMethods\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\support-annotations-22.0.0_4d9dd7ac852f81371f6c65a3568be6a164782b4d\\classes.dex
+file.1=C\:\\Users\\AHawley\\AndroidStudioProjects\\CRUDMethods\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\internal_impl-22.0.0_747b0697618b9417350a93f143766a6d3117b15c\\classes.dex
+file.0=C\:\\Users\\AHawley\\AndroidStudioProjects\\CRUDMethods\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\classes_27694ea794577f3d91250fb631933b77cfc2c021\\classes.dex

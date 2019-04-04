@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_productionlog" default="compile.module.productionlog">
+  <dirname property="module.productionlog.basedir" file="${ant.file.module_productionlog}"/>
+  
+  <property name="module.jdk.home.productionlog" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.productionlog" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.productionlog" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.productionlog" value="-encoding UTF-8 -source 8 -target 8 ${compiler.args}"/>
+  
+  <property name="productionlog.output.dir" value="${module.productionlog.basedir}/out/production/ProductionLog"/>
+  <property name="productionlog.testoutput.dir" value="${module.productionlog.basedir}/out/test/ProductionLog"/>
+  
+  <path id="productionlog.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="productionlog.module.production.classpath">
+    <path refid="${module.jdk.classpath.productionlog}"/>
+    <path refid="library.sqlite-jdbc-3.19.3.classpath"/>
+  </path>
+  
+  <path id="productionlog.runtime.production.module.classpath">
+    <pathelement location="${productionlog.output.dir}"/>
+    <path refid="library.sqlite-jdbc-3.19.3.classpath"/>
+  </path>
+  
+  <path id="productionlog.module.classpath">
+    <path refid="${module.jdk.classpath.productionlog}"/>
+    <pathelement location="${productionlog.output.dir}"/>
+    <path refid="library.sqlite-jdbc-3.19.3.classpath"/>
+  </path>
+  
+  <path id="productionlog.runtime.module.classpath">
+    <pathelement location="${productionlog.testoutput.dir}"/>
+    <pathelement location="${productionlog.output.dir}"/>
+    <path refid="library.sqlite-jdbc-3.19.3.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.productionlog">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.productionlog">
+    <patternset refid="excluded.from.module.productionlog"/>
+  </patternset>
+  
+  <path id="productionlog.module.sourcepath">
+    <dirset dir="${module.productionlog.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.productionlog" depends="compile.module.productionlog.production,compile.module.productionlog.tests" description="Compile module ProductionLog"/>
+  
+  <target name="compile.module.productionlog.production" depends="register.custom.compilers" description="Compile module ProductionLog; production classes">
+    <mkdir dir="${productionlog.output.dir}"/>
+    <javac2 destdir="${productionlog.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.productionlog}/javac">
+      <compilerarg line="${compiler.args.productionlog}"/>
+      <bootclasspath refid="productionlog.module.bootclasspath"/>
+      <classpath refid="productionlog.module.production.classpath"/>
+      <src refid="productionlog.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.productionlog"/>
+    </javac2>
+    
+    <copy todir="${productionlog.output.dir}">
+      <fileset dir="${module.productionlog.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.productionlog.tests" depends="register.custom.compilers,compile.module.productionlog.production" description="compile module ProductionLog; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.productionlog" description="cleanup module">
+    <delete dir="${productionlog.output.dir}"/>
+    <delete dir="${productionlog.testoutput.dir}"/>
+  </target>
+</project>

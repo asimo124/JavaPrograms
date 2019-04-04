@@ -1,0 +1,7 @@
+#Thu May 04 15:55:43 CDT 2017
+base.0=C\:\\Users\\AHawley\\AndroidStudioProjects\\CRUDMethods\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run-bootstrap_dd98e03c9c8e25669314938c139d3be676e1b9ab
+renamed.1=classes2.dex
+renamed.0=classes.dex
+file.1=C\:\\Users\\AHawley\\AndroidStudioProjects\\CRUDMethods\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run_6270e10bcfa8dac7dff37e6964f4618bc1fef847\\classes.dex
+base.1=C\:\\Users\\AHawley\\AndroidStudioProjects\\CRUDMethods\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run_6270e10bcfa8dac7dff37e6964f4618bc1fef847
+file.0=C\:\\Users\\AHawley\\AndroidStudioProjects\\CRUDMethods\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run-bootstrap_dd98e03c9c8e25669314938c139d3be676e1b9ab\\classes.dex

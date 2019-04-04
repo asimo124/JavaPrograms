@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_listfiles" default="compile.module.listfiles">
+  <dirname property="module.listfiles.basedir" file="${ant.file.module_listfiles}"/>
+  
+  <property name="module.jdk.home.listfiles" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.listfiles" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.listfiles" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.listfiles" value="-encoding UTF-8 -source 8 -target 8 ${compiler.args}"/>
+  
+  <property name="listfiles.output.dir" value="${module.listfiles.basedir}/out/production/ListFiles"/>
+  <property name="listfiles.testoutput.dir" value="${module.listfiles.basedir}/out/test/ListFiles"/>
+  
+  <path id="listfiles.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="listfiles.module.production.classpath">
+    <path refid="${module.jdk.classpath.listfiles}"/>
+  </path>
+  
+  <path id="listfiles.runtime.production.module.classpath">
+    <pathelement location="${listfiles.output.dir}"/>
+  </path>
+  
+  <path id="listfiles.module.classpath">
+    <path refid="${module.jdk.classpath.listfiles}"/>
+    <pathelement location="${listfiles.output.dir}"/>
+  </path>
+  
+  <path id="listfiles.runtime.module.classpath">
+    <pathelement location="${listfiles.testoutput.dir}"/>
+    <pathelement location="${listfiles.output.dir}"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.listfiles">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.listfiles">
+    <patternset refid="excluded.from.module.listfiles"/>
+  </patternset>
+  
+  <path id="listfiles.module.sourcepath">
+    <dirset dir="${module.listfiles.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.listfiles" depends="compile.module.listfiles.production,compile.module.listfiles.tests" description="Compile module ListFiles"/>
+  
+  <target name="compile.module.listfiles.production" depends="register.custom.compilers" description="Compile module ListFiles; production classes">
+    <mkdir dir="${listfiles.output.dir}"/>
+    <javac2 destdir="${listfiles.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.listfiles}/javac">
+      <compilerarg line="${compiler.args.listfiles}"/>
+      <bootclasspath refid="listfiles.module.bootclasspath"/>
+      <classpath refid="listfiles.module.production.classpath"/>
+      <src refid="listfiles.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.listfiles"/>
+    </javac2>
+    
+    <copy todir="${listfiles.output.dir}">
+      <fileset dir="${module.listfiles.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.listfiles.tests" depends="register.custom.compilers,compile.module.listfiles.production" description="compile module ListFiles; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.listfiles" description="cleanup module">
+    <delete dir="${listfiles.output.dir}"/>
+    <delete dir="${listfiles.testoutput.dir}"/>
+  </target>
+</project>
